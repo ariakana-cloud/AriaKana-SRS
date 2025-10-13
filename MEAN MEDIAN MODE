@@ -1,0 +1,39 @@
+import csv
+from statistics import mean, median, mode
+
+with open("ecommerce_transactions.csv") as file:
+  r=csv.reader(file)
+  h=next(r)
+  x=[row for row in r]
+
+column=h[2]
+values= [row[2] for row in x if row[2] !='']
+numbers= [float(n) for n in values]
+print("Column:", column)
+print("Mean:", mean(numbers))
+print("Median:", median(numbers))
+print("Mode:", mode(numbers))
+
+
+column=h[5]
+values= [row[5] for row in x if row[5] !='']
+numbers= [float(n) for n in values]
+print("Column:", column)
+print("Mean:", mean(numbers))
+print("Median:", median(numbers))
+print("Mode:", mode(numbers))
+
+
+
+def unique(index):
+  values=[row[index] for row in x if row[index] !='']
+  unique_values=set(values)
+  print("Column:", h[index])
+  print("Unique values count:", len(unique_values))
+
+
+unique(1)
+unique(3)
+unique(4)
+unique(6)
+unique(7)
