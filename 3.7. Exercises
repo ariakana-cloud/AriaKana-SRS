@@ -1,0 +1,9 @@
+import pandas as pd
+import statsmodels.api as sm
+from ISLP import load_data
+import statsmodels.formula.api as smf
+
+carseats=load_data('Carseats')
+carseats.head()
+
+model=smf.ols('
