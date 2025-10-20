@@ -1,9 +1,21 @@
+#reminder: ran this on colab instead of VSCode 
+#a. Fit a multiple regression model to predict Sales using Price, Urban, and US
+
+!pip -q install ISLP
+import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 from ISLP import load_data
-import statsmodels.formula.api as smf
+from ISLP.models import ModelSpec as ms, summarize
 
 carseats=load_data('Carseats')
 carseats.head()
 
-model=smf.ols('
+f=ms(['Price', 'Urban', 'US'])
+x=f.fit_transform(carseats)
+y=carseats['Sales']
+model=sm.OLS(y,x).fit
+
+summarize(model)
+'''
+b. Provide an interpretation of each coefficient in the model
