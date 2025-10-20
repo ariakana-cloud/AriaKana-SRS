@@ -36,7 +36,7 @@ c. Sales=13.0435-0.0545*Price-0.0219*Urban+1.2006*US+d (d is error)
 
 '''
 
-e. fit a smaller model that only uses the significant predictors
+# e. fit a smaller model that only uses the significant predictors
 
 a=ms(['Price', 'US'])
 b=a.fit_transform(carseats)
