@@ -1,4 +1,4 @@
-#reminder: ran this on colab instead of VSCode 
+#reminder: ran this on colab instead of VSCode, 3.6 ran on VSCode
 #a. Fit a multiple regression model to predict Sales using Price, Urban, and US
 
 !pip -q install ISLP
@@ -14,8 +14,31 @@ carseats.head()
 f=ms(['Price', 'Urban', 'US'])
 x=f.fit_transform(carseats)
 y=carseats['Sales']
-model=sm.OLS(y,x).fit
+model=sm.OLS(y,x).fit()
 
 summarize(model)
+
 '''
+OUTPUT PART A
+coef	std err	t	P>|t|
+intercept	13.0435	0.651	20.036	0.000
+Price	-0.0545	0.005	-10.389	0.000
+Urban[Yes]	-0.0219	0.272	-0.081	0.936
+US[Yes]	1.2006	0.259	4.635	0.000
+
+
 b. Provide an interpretation of each coefficient in the model
+Price: Sales decrease by ~0.0545 for every 1 decrease in price. This is statistically significant as p<0.001.
+Urban[Yes]:T The urban stores sell ~0.022 less than non-urban ones. This is not statistically significant though, since p=0.936.
+US[Yes]: Stores in the US sell ~1.2 more than non-US stores, and this is statistically significant as p<0.001.
+
+c. Sales=13.0435-0.0545*Price-0.0219*Urban+1.2006*US+d (d is error)
+
+'''
+
+e. fit a smaller model that only uses the significant predictors
+
+a=ms(['Price', 'US'])
+b=a.fit_transform(carseats)
+modelr=sm.OLS(y, b).fit()
+summarize(modelr)
